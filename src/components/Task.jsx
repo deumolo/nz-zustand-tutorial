@@ -1,17 +1,24 @@
 import classNames from 'classnames';
-import './Task.css'
+import './Task.css';
 import React from 'react';
-
-const STATUS = 'PLANNED';
+import { useStore } from '../store';
+import { shallow } from 'zustand/shallow';
 
 function Task({ title }) {
-  return <div className='task'>
-    <div>{title}</div>
-    <div className='bottomWrapper'>
-      <div></div>
-      <div className={classNames('status', STATUS)}> Status </div>
+  const task = useStore(
+    (state) => state.tasks.find((task) => task.title === title),
+    shallow
+  );
+
+  return (
+    <div className='task'>
+      <div>{task.title}</div>
+      <div className='bottomWrapper'>
+        <div></div>
+        <div className={classNames('status', task.status)}> {task.status} </div>
+      </div>
     </div>
-  </div>;
+  );
 }
 
 export default Task;
