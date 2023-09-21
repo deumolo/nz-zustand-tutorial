@@ -23,8 +23,6 @@ function Column({ status }) {
     [tasks, status]
   );
 
-  console.log(tasks);
-
   return (
     <div className='column'>
       <div className='titleWrapper'>
@@ -53,7 +51,7 @@ function Column({ status }) {
             />
             <button
               onClick={() => {
-                addTask(text, 'PLANNED');
+                addTask(text, status);
                 setText('');
                 setOpen(false);
               }}
